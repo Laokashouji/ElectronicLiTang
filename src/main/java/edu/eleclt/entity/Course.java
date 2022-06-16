@@ -1,5 +1,7 @@
 package edu.eleclt.entity;
 
+import edu.datastructure.MyDate;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -10,17 +12,17 @@ public class Course implements Serializable {
     //上课时间、上课地点、课程资料、当前进度、已交作业、待交作业、课程群、考试时间和考试地点等信息。
     private static Integer totId = 0;
     private Integer id;
-    private String name;
-    private String teacher;
-    private String[] time;
-    private String[] place;
-    private String[] meterials;
-    private int progress;
-    private String[] homeWorksFinished;
-    private String[] homeWorksToDo;
-    private String group;
-    private String examTime;
-    private String examPlace;
+    private String name = "";
+    private String teacher = "";
+    private MyDate[] time = {};
+    private String place = "";
+    private String[] meterials = {};
+    private int progress = 0;
+    private String[] homeWorksFinished = {};
+    private String[] homeWorksToDo = {};
+    private String group = "";
+    private MyDate examTime = new MyDate();
+    private String examPlace = "";
 
 
     public Integer getId() {
@@ -38,8 +40,10 @@ public class Course implements Serializable {
     public String getName() {
         return name;
     }
-    public Course(String name, String teacher, String[] time, String[] place, String[] meterials, int progress,
-                  String[] homeWorksFinished, String[] homeWorksToDo, String group, String examTime, String examPlace) {
+
+    public Course(String name, String teacher, MyDate[] time, String place, String[] meterials,
+                  int progress, String[] homeWorksFinished, String[] homeWorksToDo, String group, MyDate examTime,
+                  String examPlace) {
         this.id = ++totId;
         this.name = name;
         this.teacher = teacher;
@@ -52,6 +56,15 @@ public class Course implements Serializable {
         this.group = group;
         this.examTime = examTime;
         this.examPlace = examPlace;
+    }
+
+    public Course(String name, String teacher, MyDate[] time, String place, String group) {
+        this.id = ++totId;
+        this.name = name;
+        this.teacher = teacher;
+        this.time = time;
+        this.place = place;
+        this.group = group;
     }
 
     public Course() {
@@ -68,11 +81,11 @@ public class Course implements Serializable {
         return teacher;
     }
 
-    public String[] getTime() {
+    public MyDate[] getTime() {
         return time;
     }
 
-    public String[] getPlace() {
+    public String getPlace() {
         return place;
     }
 
@@ -80,8 +93,52 @@ public class Course implements Serializable {
         return meterials;
     }
 
+    public void setExamTime(MyDate examTime) {
+        this.examTime = examTime;
+    }
+
+    public void setExamPlace(String examPlace) {
+        this.examPlace = examPlace;
+    }
+
     public int getProgress() {
         return progress;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public void setTime(MyDate[] time) {
+        this.time = time;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public void setMeterials(String[] meterials) {
+        this.meterials = meterials;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
+    public void setHomeWorksFinished(String[] homeWorksFinished) {
+        this.homeWorksFinished = homeWorksFinished;
+    }
+
+    public void setHomeWorksToDo(String[] homeWorksToDo) {
+        this.homeWorksToDo = homeWorksToDo;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String[] getHomeWorksFinished() {
@@ -96,7 +153,7 @@ public class Course implements Serializable {
         return group;
     }
 
-    public String getExamTime() {
+    public MyDate getExamTime() {
         return examTime;
     }
 
@@ -109,14 +166,15 @@ public class Course implements Serializable {
         return "Course{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", teacher='" + teacher + '\'' +
                 ", time=" + Arrays.toString(time) +
-                ", place=" + Arrays.toString(place) +
+                ", place=" + place +
                 ", meterials=" + Arrays.toString(meterials) +
                 ", progress=" + progress +
                 ", homeWorksFinished=" + Arrays.toString(homeWorksFinished) +
                 ", homeWorksToDo=" + Arrays.toString(homeWorksToDo) +
                 ", group='" + group + '\'' +
-                ", examTime='" + examTime + '\'' +
+                ", examTime=" + examTime.toString()+
                 ", examPlace='" + examPlace + '\'' +
                 '}';
     }

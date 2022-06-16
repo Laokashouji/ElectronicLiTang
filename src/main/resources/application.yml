@@ -1,2 +1,6 @@
 server:
   port: 9090
+
+files:
+  upload:
+    path: E:\ElectronicLiTang\src\main\resources\static\data\file\
