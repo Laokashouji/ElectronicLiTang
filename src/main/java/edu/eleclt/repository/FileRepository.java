@@ -1,6 +1,9 @@
 package edu.eleclt.repository;
 
 import edu.datastructure.MyArrayList;
+import edu.datastructure.MyList;
+import edu.datastructure.StringUtil;
+import edu.eleclt.entity.Activity;
 import edu.eleclt.entity.MyFile;
 import edu.eleclt.loader.Loader;
 
@@ -34,5 +37,15 @@ public class FileRepository {
     public void save() {
         Loader.download("src/main/resources/static/data/FileNum.txt", files.size());
         Loader.download("src/main/resources/static/data/File.dat", files);
+    }
+
+    public MyList<MyFile> searchByName(String name) {
+        MyArrayList<MyFile> list = new MyArrayList<>();
+        for (int i = 0; i < files.size(); i++) {
+            if (StringUtil.KMP(files.get(i).getName(), name, 0) != -1) {
+                list.add(files.get(i));
+            }
+        }
+        return list;
     }
 }

@@ -34,10 +34,17 @@ public class FileController {
         return fileRepository.findAll().getAll();
     }
 
+    @GetMapping("/searchByName/{name}")
+    public Object[] searchByName(@PathVariable("name") String Name) {
+        Log.write("查找名称为"+Name+"的活动");
+        return fileRepository.searchByName(Name).getAll();
+    }
+
     @PostMapping("/upload")
     public Object[] upload(@RequestParam(value = "file") MultipartFile file) throws IOException {
         String name = file.getOriginalFilename();
         String type = name.substring(name.lastIndexOf(".") + 1);
+        name = name.substring(0, name.lastIndexOf("."));
         long size = file.getSize();
         String uName = Long.toString(new Date().getTime());
         File files = new File(fileUploadPath + uName + "." + type);

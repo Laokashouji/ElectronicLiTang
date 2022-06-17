@@ -21,8 +21,8 @@ public class ActivityController {
         return activityRepository.findAll().getAll();
     }
 
-    @GetMapping("/searchByName/{Name}")
-    public Object[] searchByName(@PathVariable("Name") String Name) {
+    @GetMapping("/searchByName/{name}")
+    public Object[] searchByName(@PathVariable("name") String Name) {
         Log.write("查找名称为"+Name+"的活动");
         return activityRepository.searchByName(Name).getAll();
     }
