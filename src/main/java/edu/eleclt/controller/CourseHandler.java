@@ -1,14 +1,11 @@
 package edu.eleclt.controller;
 
 import edu.datastructure.MyDate;
-import edu.eleclt.entity.Course;
 import edu.eleclt.repository.CourseRepository;
 
 import org.junit.Test;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +58,15 @@ public class CourseHandler {
         return  "success";
     }
 
+    @PostMapping("/editCourse")
+    public String editCourse(@RequestBody Map<String,Object> map){
+
+        courseRepository.editCourse((int)map.get("id"), map);
+        courseRepository.save();
+
+        System.out.println(courseRepository.size());
+        return  "success";
+    }
     @Test
     public void Mytest() {
         String teacher = "丁真珍珠";
@@ -73,12 +79,6 @@ public class CourseHandler {
         String group = "114514";
         MyDate examTime = new MyDate();
         String examPlace = "N305";
-        /*courseRepository.addCourse(new Course("高等数学", teacher, time, place, meterials, progress,
-                homeWorksFinished, homeWorksToDo, group, examTime, examPlace));
-        courseRepository.addCourse(new Course("线性代数", teacher, time, place, meterials, progress,
-                homeWorksFinished, homeWorksToDo, group, examTime, examPlace));
-        courseRepository.addCourse(new Course("数据结构", teacher, time, place, meterials, progress,
-                homeWorksFinished, homeWorksToDo, group, examTime, examPlace));*/
         courseRepository.save();
         System.out.println(courseRepository.size());
     }

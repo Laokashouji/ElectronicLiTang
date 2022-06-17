@@ -1,7 +1,9 @@
 package edu.eleclt.loader;
 
 import edu.datastructure.MyArrayList;
+import edu.eleclt.entity.Activity;
 import edu.eleclt.entity.Course;
+import edu.eleclt.entity.MyFile;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class Loader {
         return 0;
     }
 
-    public static <T> MyArrayList<T> load(String fileName, String fileName2) {
+    public static <T> MyArrayList<T> loadCourse(String fileName, String fileName2) {
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
 
@@ -38,7 +40,42 @@ public class Loader {
         }
         return null;
     }
+    public static <T> MyArrayList<T> loadFile(String fileName, String fileName2) {
+        try {
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
 
+            MyFile.setTotId(readNum(fileName2));
+            MyArrayList<T> list = (MyArrayList<T>) is.readObject();
+
+            //is.close();
+            return list;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static <T> MyArrayList<T> loadActivity(String fileName, String fileName2) {
+        try {
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
+
+            Activity.setTotId(readNum(fileName2));
+            MyArrayList<T> list = (MyArrayList<T>) is.readObject();
+
+            //is.close();
+            return list;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public static <T> void download(String fileName,MyArrayList<T> list) {
         try {
             ObjectOutputStream os = new ObjectOutputStream(

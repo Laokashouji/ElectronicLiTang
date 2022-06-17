@@ -5,6 +5,7 @@ import cn.hutool.crypto.SecureUtil;
 import edu.eleclt.entity.MyFile;
 import edu.eleclt.repository.FileRepository;
 import org.apache.commons.io.FileUtils;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,11 @@ public class FileController {
 
     @Value("${files.upload.path}")
     private String fileUploadPath;
+
+    @GetMapping("/findAll")
+    public Object[] findAll() {
+        return fileRepository.findAll().getAll();
+    }
 
     @PostMapping("/upload")
     public Object[] upload(@RequestParam(value = "file") MultipartFile file) throws IOException {
@@ -58,5 +64,10 @@ public class FileController {
         os.write(FileUtils.readFileToByteArray(file));
         os.flush();
         os.close();
+    }
+
+    @Test
+    public void addFile(){
+
     }
 }

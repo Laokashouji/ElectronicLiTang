@@ -24,6 +24,14 @@ public class MyFile implements Serializable {
         this.md5 = md5;
     }
 
+    public static Integer getTotId() {
+        return totId;
+    }
+
+    public static void setTotId(Integer totId) {
+        MyFile.totId = totId;
+    }
+
     public String getMd5() {
         return md5;
     }

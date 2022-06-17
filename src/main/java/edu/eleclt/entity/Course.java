@@ -68,7 +68,7 @@ public class Course implements Serializable {
     }
 
     public Course() {
-        totId++;
+        id = ++totId;
     }
 
     public Course(String name) {
