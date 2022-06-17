@@ -3,6 +3,7 @@ package edu.eleclt.controller;
 
 import cn.hutool.crypto.SecureUtil;
 import edu.eleclt.entity.MyFile;
+import edu.eleclt.loader.Log;
 import edu.eleclt.repository.FileRepository;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -51,6 +52,8 @@ public class FileController {
 
         fileRepository.addFile(new MyFile(size, name, type, url, md5));
         System.out.println("fileRepository = " + fileRepository.size());
+
+        Log.write("上传文件名为"+name+"的文件");
         return new Object[]{url, uName + "." + type};
     }
 

@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class ActivityRepository {
 
-    private static MyArrayList<Activity> activities = new MyArrayList<>();
+    //private static MyArrayList<Activity> activities = new MyArrayList<>();
 
-    /*private static MyArrayList<Activity> activities = Loader.loadCourse("src/main/resources/static/data/Activity.dat",
+    private static MyArrayList<Activity> activities = Loader.loadCourse("src/main/resources/static/data/Activity.dat",
             "src/main/resources/static/data/ActivityNum.txt");
-*/
+
     public static MyArrayList<Activity> findAll(){ return activities;}
 
     public static void addActivity(Activity activity) {
