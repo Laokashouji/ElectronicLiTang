@@ -2,13 +2,11 @@ package edu.datastructure;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 public class StringUtil {
 
     @Test
     public void KMPTest() {
-        int i;
+
         String source = "数据结构课程设计报告";
         String target = "课程设计";
 

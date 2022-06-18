@@ -13,7 +13,7 @@ public class ActivityRepository {
 
     //private static MyArrayList<Activity> activities = new MyArrayList<>();
 
-    private static MyArrayList<Activity> activities = Loader.loadCourse("src/main/resources/static/data/Activity.dat",
+    private static MyArrayList<Activity> activities = Loader.loadActivity("src/main/resources/static/data/Activity.dat",
             "src/main/resources/static/data/ActivityNum.txt");
 
     public static MyArrayList<Activity> findAll() {

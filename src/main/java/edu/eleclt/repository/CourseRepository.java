@@ -3,6 +3,7 @@ package edu.eleclt.repository;
 import edu.datastructure.MyArrayList;
 import edu.datastructure.MyDate;
 import edu.datastructure.MyList;
+import edu.datastructure.StringUtil;
 import edu.eleclt.entity.Course;
 import edu.eleclt.loader.Loader;
 
@@ -28,10 +29,10 @@ public class CourseRepository {
         return courses.slices((page - 1) * size, page * size > courses.size() ? courses.size() : page * size);
     }
 
-    public static MyArrayList<Course> searchByCourseName(String CourseName) {
+    public static MyArrayList<Course> searchByCourseName(String courseName) {
         MyArrayList<Course> arr = new MyArrayList<Course>();
         for (int i = 0; i < courses.size(); i++) {
-            if (courses.get(i).getName().equals(CourseName)) {
+            if (StringUtil.KMP(courses.get(i).getName(), courseName, 0) != -1) {
                 arr.add(courses.get(i));
             }
         }
@@ -50,7 +51,7 @@ public class CourseRepository {
     public static MyList<Course> searchByTeacherName(String teacherName) {
         MyArrayList<Course> arr = new MyArrayList<Course>();
         for (int i = 0; i < courses.size(); i++) {
-            if (courses.get(i).getTeacher().equals(teacherName)) {
+            if (StringUtil.KMP(courses.get(i).getTeacher(), teacherName, 0) != -1) {
                 arr.add(courses.get(i));
             }
         }

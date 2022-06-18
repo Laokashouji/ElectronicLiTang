@@ -3,13 +3,12 @@ package edu.eleclt.repository;
 import edu.datastructure.MyArrayList;
 import edu.datastructure.MyList;
 import edu.datastructure.StringUtil;
-import edu.eleclt.entity.Activity;
 import edu.eleclt.entity.MyFile;
 import edu.eleclt.loader.Loader;
 
 public class FileRepository {
 
-    private static MyArrayList<MyFile> files = Loader.loadCourse("src/main/resources/static/data/File.dat",
+    private static MyArrayList<MyFile> files = Loader.loadFile("src/main/resources/static/data/File.dat",
             "src/main/resources/static/data/FileNum.txt");
     //private MyArrayList<MyFile> files = new MyArrayList<>();
 

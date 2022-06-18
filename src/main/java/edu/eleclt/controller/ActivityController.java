@@ -2,10 +2,8 @@ package edu.eleclt.controller;
 
 import edu.eleclt.loader.Log;
 import edu.eleclt.repository.ActivityRepository;
-import edu.eleclt.repository.CourseRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,6 +24,7 @@ public class ActivityController {
         Log.write("查找名称为"+Name+"的活动");
         return activityRepository.searchByName(Name).getAll();
     }
+
     @GetMapping("/searchByTag/{Tag}")
     public Object[] searchByTag(@PathVariable("Tag") String Tag) {
         Log.write("查找标签为"+Tag+"的活动");
