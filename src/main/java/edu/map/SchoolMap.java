@@ -2,8 +2,6 @@ package edu.map;
 
 import edu.datastructure.MinHeap;
 import edu.datastructure.MyArrayList;
-import edu.datastructure.MyList;
-import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,15 +12,16 @@ import java.util.Scanner;
 public class SchoolMap {
 
     private static final int MAX_SIZE = 1000;
-    public static final double speed[] = {1, 5};
 
     private Edge[] edges = new Edge[MAX_SIZE];
     private int[] head = new int[MAX_SIZE];
     private Place[] places = new Place[MAX_SIZE];
+    private int placeNum = 0;
     private Map<String, Integer> map = new HashMap<>();
     private String file1;
     private String file2;
     private String pp = "";
+
 
     public Object[] dijkstra(String source, String target) {
         Double[] d = new Double[MAX_SIZE];
@@ -164,7 +163,6 @@ public class SchoolMap {
                 if(i != 0)
                     pp = pp + "\r\n";
             }
-
         }
 
     }
@@ -183,6 +181,7 @@ public class SchoolMap {
             places[t] = new Place(name, school, type == 1);
             map.put(name, t++);
         }
+        this.placeNum = t;
     }
 
     private void readEdges(File file) throws FileNotFoundException {
@@ -220,6 +219,21 @@ public class SchoolMap {
         head[u] = tot;
     }
 
+    public Place[] getPlaces() {
+        return places;
+    }
+
+    public int getPlaceNum() {
+        return placeNum;
+    }
+
+    public void setPlaceNum(int placeNum) {
+        this.placeNum = placeNum;
+    }
+
+    public void setPlaces(Place[] places) {
+        this.places = places;
+    }
 }
 
 class Path {
@@ -283,5 +297,9 @@ class Node {
 
     public void setS(int s) {
         this.s = s;
+    }
+
+    public void setD(double d) {
+        this.d = d;
     }
 }

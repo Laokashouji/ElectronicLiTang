@@ -62,33 +62,38 @@ public class CourseRepository {
         courses.add(course);
     }
 
-    public static void addCourse(String name, String teacherName, List<Map<String, Object>> times, String place, String group) {
+    public static void addCourse(Map<String,Object> map) {
+        String name = (String) map.get("name");
+        String teacherName = (String) map.get("teacherName");
+        List<Map<String,Object>> times= (List<Map<String, Object>>) map.get("times");
+        String place = (String) map.get("place");
+        String groupNum = (String) map.get("groupNum");
         MyDate[] dates = new MyDate[times.size()];
         int i = 0;
-        for (Map<String, Object> map : times) {
-            String weekday = (String) map.get("key");
-            List<String> time = (List<String>) map.get("value");
+        for (Map<String, Object> maps : times) {
+            String weekday = (String) maps.get("key");
+            List<String> time = (List<String>) maps.get("value");
             dates[i++] = new MyDate(weekday, time);
         }
-        courses.add(new Course(name, teacherName, dates, place, group));
+        courses.add(new Course(name, teacherName, dates, place, groupNum));
     }
 
     public static void editCourse(int id, Map<String,Object> map) {
-        String name = (String) map.get("name");
-        String teacherName = (String) map.get("teacher");
+
         List<Map<String,Object>> times= (List<Map<String, Object>>) map.get("time");
-        String place = (String) map.get("place");
-        String groupNum = (String) map.get("group");
-        int progress = Integer.parseInt(map.get("progress").toString());
         Map<String,Object> examTime = (Map<String,Object>) map.get("examTime");
-        String examPlace = (String) map.get("examPlace");
         Course course = CourseRepository.searchById(id);
-        course.setExamPlace(examPlace);
-        course.setGroup(groupNum);
-        course.setName(name);
-        course.setTeacher(teacherName);
-        course.setProgress(progress);
-        course.setPlace(place);
+        LinkedHashMap<String, Object> lm = (LinkedHashMap<String, Object>) map.get("homeWorksToDo");
+        ArrayList<String> homeWorksToDo = (ArrayList<String>) lm.get("all");
+        course.setExamPlace((String) map.get("examPlace"));
+        course.setGroup((String) map.get("group"));
+        course.setName((String) map.get("name"));
+        course.setTeacher((String) map.get("teacher"));
+        course.setProgress(Integer.parseInt(map.get("progress").toString()));
+        course.setPlace((String) map.get("place"));
+
+       course.setHomeWorksToDo(new MyArrayList<String>(homeWorksToDo));
+
         MyDate[] dates = new MyDate[times.size()];
         int i = 0;
         for (Map<String, Object> maps : times) {
@@ -106,7 +111,7 @@ public class CourseRepository {
     }
 
 
-        public static int size() {
+    public static int size() {
         return courses.size();
     }
 
@@ -115,4 +120,21 @@ public class CourseRepository {
         Loader.download("src/main/resources/static/data/Course.dat", courses);
     }
 
+    public boolean editFile(String name, int id, int type) {
+        Course course = searchById(id);
+        if(type == 1){
+            course.addMeterial(name);
+            return true;
+        }
+        else if (type == 2) {
+            MyArrayList<String> list = course.getHomeWorksToDo();
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).equals(name)) {
+                    course.addHomework(name);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -31,4 +31,9 @@ public class MapController {
         Log.write("查询"+source+"到"+target+"的最短交通工具时间");
         return mapRepository.findByVehicle(source, target, school);
     }
+
+    @GetMapping("/getPlace")
+    public Object[] getPlace() {
+        return mapRepository.getPlace();
+    }
 }

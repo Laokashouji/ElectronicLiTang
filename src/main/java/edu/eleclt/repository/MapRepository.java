@@ -1,5 +1,6 @@
 package edu.eleclt.repository;
 
+import edu.map.Place;
 import edu.map.SchoolMap;
 
 public class MapRepository {
@@ -37,5 +38,22 @@ public class MapRepository {
             return map2.dijkstra3(source, target);
         }
         return null;
+    }
+
+    public Object[] getPlace(){
+        Place[] places1 = map1.getPlaces();
+        Place[] places2 = map2.getPlaces();
+        int l1 = map1.getPlaceNum();
+        int l2 = map2.getPlaceNum();
+
+        Object[] objects = new Object[l1 + l2];
+
+        for (int i = 0; i < l1; i++) {
+            objects[i] = places1[i];
+        }
+        for (int i = 0; i < l2; i++) {
+            objects[l1 + i] = places2[i];
+        }
+        return objects;
     }
 }

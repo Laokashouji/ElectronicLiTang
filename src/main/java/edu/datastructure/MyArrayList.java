@@ -2,6 +2,7 @@ package edu.datastructure;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class MyArrayList<E> implements MyList<E>, Serializable {
 
@@ -27,6 +28,13 @@ public class MyArrayList<E> implements MyList<E>, Serializable {
     public MyArrayList() {
         arr = new Object[this.MIN_SIZE];
         size = 0;
+    }
+
+    public MyArrayList(ArrayList<E> arrayList) {
+        arr = new Object[this.MIN_SIZE];
+        for (int i = 0; i < arrayList.size(); i++) {
+            add(arrayList.get(i));
+        }
     }
 
     public MyArrayList(int length) {
@@ -172,5 +180,22 @@ public class MyArrayList<E> implements MyList<E>, Serializable {
             newArr[i] = arr[a + i];
         }
         return new MyArrayList<E>(newArr);
+    }
+
+    public void delete(E name) {
+        if(size > 0){
+            for (int i = 0; i < size; i++) {
+                if(((E)arr[i]).equals(name)){
+                    Object[] newArr = new Object[size - 1];
+                    int t = 0;
+                    for (int j = 0; j < size; j++) {
+                        if(i != j)
+                            newArr[t++] = arr[j];
+                    }
+                    size--;
+                    break;
+                }
+            }
+        }
     }
 }

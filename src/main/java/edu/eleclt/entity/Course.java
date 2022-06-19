@@ -1,8 +1,10 @@
 package edu.eleclt.entity;
 
+import edu.datastructure.MyArrayList;
 import edu.datastructure.MyDate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Course implements Serializable {
@@ -16,10 +18,10 @@ public class Course implements Serializable {
     private String teacher = "";
     private MyDate[] time = {};
     private String place = "";
-    private String[] meterials = {};
+    private MyArrayList<String> meterials = new MyArrayList<String>();
     private int progress = 0;
-    private String[] homeWorksFinished = {};
-    private String[] homeWorksToDo = {};
+    private MyArrayList<String> homeWorksFinished = new MyArrayList<String>();
+    private MyArrayList<String> homeWorksToDo = new MyArrayList<String>();
     private String group = "";
     private MyDate examTime = new MyDate();
     private String examPlace = "";
@@ -41,8 +43,8 @@ public class Course implements Serializable {
         return name;
     }
 
-    public Course(String name, String teacher, MyDate[] time, String place, String[] meterials,
-                  int progress, String[] homeWorksFinished, String[] homeWorksToDo, String group, MyDate examTime,
+    public Course(String name, String teacher, MyDate[] time, String place, MyArrayList<String> meterials,
+                  int progress, MyArrayList<String> homeWorksFinished, MyArrayList<String> homeWorksToDo, String group, MyDate examTime,
                   String examPlace) {
         this.id = ++totId;
         this.name = name;
@@ -89,7 +91,7 @@ public class Course implements Serializable {
         return place;
     }
 
-    public String[] getMeterials() {
+    public MyArrayList<String> getMeterials() {
         return meterials;
     }
 
@@ -121,7 +123,7 @@ public class Course implements Serializable {
         this.place = place;
     }
 
-    public void setMeterials(String[] meterials) {
+    public void setMeterials(MyArrayList<String> meterials) {
         this.meterials = meterials;
     }
 
@@ -129,11 +131,11 @@ public class Course implements Serializable {
         this.progress = progress;
     }
 
-    public void setHomeWorksFinished(String[] homeWorksFinished) {
+    public void setHomeWorksFinished(MyArrayList<String> homeWorksFinished) {
         this.homeWorksFinished = homeWorksFinished;
     }
 
-    public void setHomeWorksToDo(String[] homeWorksToDo) {
+    public void setHomeWorksToDo(MyArrayList<String> homeWorksToDo) {
         this.homeWorksToDo = homeWorksToDo;
     }
 
@@ -141,11 +143,11 @@ public class Course implements Serializable {
         this.group = group;
     }
 
-    public String[] getHomeWorksFinished() {
+    public MyArrayList<String> getHomeWorksFinished() {
         return homeWorksFinished;
     }
 
-    public String[] getHomeWorksToDo() {
+    public MyArrayList<String> getHomeWorksToDo() {
         return homeWorksToDo;
     }
 
@@ -168,14 +170,23 @@ public class Course implements Serializable {
                 ", name='" + name + '\'' +
                 ", teacher='" + teacher + '\'' +
                 ", time=" + Arrays.toString(time) +
-                ", place=" + place +
-                ", meterials=" + Arrays.toString(meterials) +
+                ", place='" + place + '\'' +
+                ", meterials=" + meterials +
                 ", progress=" + progress +
-                ", homeWorksFinished=" + Arrays.toString(homeWorksFinished) +
-                ", homeWorksToDo=" + Arrays.toString(homeWorksToDo) +
+                ", homeWorksFinished=" + homeWorksFinished +
+                ", homeWorksToDo=" + homeWorksToDo +
                 ", group='" + group + '\'' +
-                ", examTime=" + examTime.toString()+
+                ", examTime=" + examTime +
                 ", examPlace='" + examPlace + '\'' +
                 '}';
+    }
+
+    public void addMeterial(String name) {
+        this.meterials.add(name);
+    }
+
+    public void addHomework(String name) {
+        this.homeWorksFinished.add(name);
+        this.homeWorksToDo.delete(name);
     }
 }
